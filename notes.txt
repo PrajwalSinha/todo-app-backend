@@ -1,0 +1,43 @@
+require function import karta hai.
+ye jo bar bar node filename.js karke run karte hai isse acha hum nodemon use karenge acha ab batao nodemon kya chez hai??--agar aap koi bhi code change karoge na to wo automatically server restart kar dega similar to go live.
+
+package.json mai jaake 
+"scripts": {
+    "start": "node index.js",
+    "dev":"nodemon index.js"
+  },
+
+scripts ke aandar upar wala line likh do
+aur terminal mai npm run dev -- server automatically update lega agar tum usme koi changes karoge to.
+
+.env mai hum apna configuration define karenge like konsa port no. hoga and all.
+config mai humlog database ka connection set karenge apne server ke sath aur ye line hamesha same hoga har case mai.
+connection se phale npm i mongooose karna.
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/myDatabase',{
+  useNewurlParser:true,
+  useUnifiedTopology:true
+})
+.then(()=>{console.log("connection Successful")})
+.catch( (error)=>{console.log("Received an error")})
+
+ye line copy paste kardo as it is.
+
+mongoose.connect(process.env.DATABASE_URL)
+acha sawal ye hai ke mera ye url process wale object ke aandar kaise chala gaya??--basically humne feed kaise kiya??--shuru mai to humne feed he nhi kiya yaani ke code phat jayega to agar mere ko url ko process wale object mai feed karna hai--.env library use karke --kaise?-npm i dotenv
+
+require("dotenv").config();
+es statement se aapne jo bhi environment mai define kiya hoga wo sara ka sara load ho jayega aapke process object ke aandar
+
+mongoose.connect(process.env.DATABASE_URL)
+
+phir tum es line ka use kar skte ho.
+
+models mai schema define karenge aur es model ko controller use karega. schema is description of your data.
+
+create todo -> todo type ke object ke entry database mai save karna chahte hai.
+
+index.js ek route se mapped hai phir particular route ek controller se mapped hai
+aur controller kisi model ko use kar rha hai.
+
+controller mai sara logic defined hoga
